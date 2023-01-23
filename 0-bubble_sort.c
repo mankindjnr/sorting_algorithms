@@ -5,10 +5,20 @@
  *@array: the array of integers
  *@size: the sizze of a the array
  */
+
+void swap(int *a, int *b)
+{
+	int temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 void bubble_sort(int *array, size_t size)
 {
 	size_t i, j;
-	int flag, temp;
+	int flag = 0;
 
 	for (i = 0; i < size - 1; i++)
 	{
@@ -18,9 +28,7 @@ void bubble_sort(int *array, size_t size)
 		{
 			if (array[j] > array[j + 1])
 			{
-				temp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = temp;
+				swap(&array[j], &array[j + 1]);
 				flag = 1;
 			}
 		}
