@@ -3,31 +3,31 @@
 /**
  *shell_sort - knuth sequence on shell sort
  *@array: the array to size
- *#size: the size of the array
+ *@size: the size of the array
  */
 void shell_sort(int *array, size_t size)
 {
-	size_t gap, i;
-	int j, lb;
+	size_t gap, j;
+	int i, temp;
 
-	gap = 1;
-
-	while (gap <= (size - 1) / 9)
+	for (gap = size * 3 + 1; gap >= 1; gap = gap / 3)
 	{
-		gap = size * 3 + 1;
-	}
-
-	while (gap >= 1)
-	{
-		for (i = gap; i < size; i++)
+		for (j = gap; j < size; j++)
 		{
-			lb = array[i];
-
-			for (j = i - gap; j >= 0 && lb < array[j]; j = j - gap)
-				array[j + gap] = array[j];
-			array[j + gap] = lb;
+			for (i = j - gap; i >= 0; i = i - gap)
+			{
+				if (array[i + gap] > array[i])
+				{
+					break;
+				}
+				else
+				{
+					temp = array[i + gap];
+					array[i + gap] = array[i];
+					array[i] = temp;
+				}
+			}
 		}
-		gap = gap / 3;
 		print_array(array, size);
 	}
 }
